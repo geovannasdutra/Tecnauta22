@@ -1,0 +1,1405 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TecNauta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --primary:#4f46e5; --bg:#f3f4f6; --card:#ffffff; }
+    body{ background:var(--bg); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .app-shell{ max-width:980px; margin:18px auto; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(2,6,23,.12); background:var(--card); }
+    .hidden-screen{ display:none; }
+    iframe{ width:100%; aspect-ratio:16/9; border-radius:10px; display:block; }
+    .cover{ width:100%; height:240px; object-fit:cover; border-radius:8px; }
+    .small-img{ width:100%; height:140px; object-fit:cover; border-radius:8px; }
+    .avatar{ width:72px; height:72px; border-radius:9999px; object-fit:cover; }
+    .card { background:var(--card); border-radius:12px; box-shadow: 0 6px 20px rgba(15,23,42,.06); padding:16px; }
+    table{ width:100%; border-collapse:collapse; }
+    th,td{ border:1px solid #e6e6e6; padding:10px; text-align:left; vertical-align:middle; font-size:0.95rem; }
+    th{ background:#fafafa; font-weight:700; }
+    .content p, .content li{ color:#111827; line-height:1.6; font-size:1rem; }
+    .muted { color: #6b7280; }
+    @media (max-width:640px){ .cover{ height:160px; } .content p{ font-size:0.98rem } th,td{ font-size:0.85rem } }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+
+    <header id="navbar" class="bg-white border-b p-4 flex flex-wrap justify-between items-center hidden-screen">
+      <div class="flex items-center gap-4">
+        <div style="color:var(--primary)" class="text-2xl font-semibold">TecNauta</div>
+        <div id="greet" class="text-sm text-gray-600 hidden">Olá, <span id="greetName"></span></div>
+      </div>
+      <nav class="flex gap-2 items-center">
+        <a href="#home" class="px-3 py-1 rounded hover:bg-gray-100">Início</a>
+        <a href="#subjects" class="px-3 py-1 rounded hover:bg-gray-100">Matérias</a>
+        <a href="#quiz" class="px-3 py-1 rounded hover:bg-gray-100">Quiz</a>
+        <a href="#ranking" class="px-3 py-1 rounded hover:bg-gray-100">Ranking</a>
+        <a href="#materia-portugues" class="px-3 py-1 rounded hover:bg-gray-100">Português</a>
+        <a href="#materia-matematica" class="px-3 py-1 rounded hover:bg-gray-100">Matemática</a>
+        <a href="#materia-historia" class="px-3 py-1 rounded hover:bg-gray-100">História</a>
+        <a href="#materia-geografia" class="px-3 py-1 rounded hover:bg-gray-100">Geografia</a>
+        <a href="#materia-ciencias" class="px-3 py-1 rounded hover:bg-gray-100">Ciências</a>
+        <a href="#profile" class="px-3 py-1 rounded hover:bg-gray-100">Perfil</a>
+        <img id="navAvatar" class="avatar ml-3" alt="avatar" src="c:\Users\Geo\Downloads\Imagem do WhatsApp de 2025-07-01 à(s) 13.53.44_0c4ef0de.jpg">
+      </nav>
+    </header>
+
+    <main id="login" class="p-6 bg-gradient-to-b from-purple-700 to-indigo-600 text-white min-h-[520px]">
+      <div class="bg-white rounded-2xl p-6 text-gray-900 shadow-lg max-w-md mx-auto">
+        <h1 class="text-2xl font-bold mb-4 text-center">Entrar no TecNauta</h1>
+        <input id="loginEmail" class="w-full mb-3 p-3 border rounded" placeholder="E-mail" />
+        <input id="loginPass" type="password" class="w-full mb-4 p-3 border rounded" placeholder="Senha" />
+        <button id="btnLogin" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Entrar</button>
+        <p class="mt-3 text-sm text-center text-gray-600">Ainda não tem conta?
+          <a href="#signup" class="text-indigo-600 underline">Criar</a>
+        </p>
+      </div>
+    </main>
+
+    <main id="signup" class="p-6 bg-gradient-to-b from-indigo-700 to-purple-600 text-white min-h-[520px] hidden-screen">
+      <div class="bg-white rounded-2xl p-6 text-gray-900 shadow-lg max-w-md mx-auto">
+        <h1 class="text-2xl font-bold mb-4 text-center">Criar conta</h1>
+         <input id="signupName" class="w-full mb-3 p-3 border rounded" placeholder="Nome completo" />
+        <input id="signupEmail" class="w-full mb-3 p-3 border rounded" placeholder="E-mail" />
+        <input id="signupPass" type="password" class="w-full mb-4 p-3 border rounded" placeholder="Senha" />
+        <button id="btnSignup" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Cadastrar</button>
+        <p class="mt-3 text-sm text-center text-gray-600">Já tem conta?
+          <a href="#login" class="text-indigo-600 underline">Entrar</a>
+        </p>
+      </div>
+    </main>
+
+    <main id="home" class="p-6 hidden-screen bg-gray-50 min-h-[520px]">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-3xl font-bold">Bem-vindo(a)</h2>
+          <div class="muted text-sm">Escolha uma atividade para treinar hoje.</div>
+        </div>
+        <img id="homeAvatar" class="avatar" src="c:\Users\Geo\Documents\Imagem do WhatsApp de 2025-12-01 à(s) 22.25.08_baa0526f.jpg" alt="avatar">
+      </div>
+      <p class="text-gray-600 mb-6">Selecione o que deseja estudar hoje — mais conteúdo, mais pontos e suba no ranking!</p>
+      <div class="space-y-3">
+        <a href="#subjects" class="block w-full p-4 bg-white rounded shadow text-left text-lg">📚 Matérias</a>
+        <a href="#quiz" class="block w-full p-4 bg-white rounded shadow text-left text-lg">🧠 Quiz geral</a>
+        <a href="#ranking" class="block w-full p-4 bg-white rounded shadow text-left text-lg">🏆 Ranking de Evolução</a>
+        <a href="#profile" class="block w-full p-4 bg-white rounded shadow text-left text-lg">👤 Perfil</a>
+      </div>
+    </main>
+
+    <main id="subjects" class="p-6 hidden-screen bg-gray-50 min-h-[520px]">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Matérias</h2>
+        <a href="#home" class="px-3 py-1 rounded border">Voltar</a>
+      </div>
+      <div class="grid gap-4">
+        <div class="p-4 bg-white rounded shadow flex gap-3 items-center">
+          <img src="c:\Users\Geo\Pictures\1.-biologia-sintetica-720.jpg" class="small-img" style="width:120px;flex-shrink:0" alt="biologia">
+          <div class="flex-1">
+            <div class="font-medium text-lg">Biologia</div>
+            <div class="text-sm text-gray-600">Estudo aprofundado do Reino Plantae, fisiologia vegetal, PANCs e práticas sustentáveis para produção alimentar local com foco em aplicações práticas, segurança alimentar e biodiversidade.</div>
+          </div>
+          <a href="#biology" class="text-indigo-600 font-semibold">Abrir</a>
+        </div>
+
+        <div class="p-4 bg-white rounded shadow flex gap-3 items-center">
+          <img src="c:\Users\Geo\Pictures\literature-3033196-1280.webp" class="small-img" style="width:120px;flex-shrink:0" alt="portugues">
+          <div class="flex-1">
+            <div class="font-medium text-lg">Português</div>
+            <div class="text-sm text-gray-600">Interpretação textual, análise de discurso, argumentação e gramática normativa  com exercícios focados para vestibulares e ENEM, incluindo interpretação crítica e inferências complexas.</div>
+          </div>
+          <a href="#materia-portugues" class="text-indigo-600 font-semibold">Abrir</a>
+        </div>
+
+        <div class="p-4 bg-white rounded shadow flex gap-3 items-center">
+          <img src="c:\Users\Geo\Pictures\tabuleiro-com-inscricoes-de-formulas-e-calculos-cientificos_1150-19413.avif" class="small-img" style="width:120px;flex-shrink:0" alt="matematica">
+          <div class="flex-1">
+            <div class="font-medium text-lg">Matemática</div>
+            <div class="text-sm text-gray-600">Porcentagem, regra de três, proporcionalidade e geometria plana, com problemas contextualizados que exigem raciocínio e cálculo passo a passo — ideal para fortalecer resolução de questões complexas.</div>
+          </div>
+          <a href="#materia-matematica" class="text-indigo-600 font-semibold">Abrir</a>
+        </div>
+
+        <div class="p-4 bg-white rounded shadow flex gap-3 items-center">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=600&auto=format&fit=crop&s=4c5d6e" class="small-img" style="width:120px;flex-shrink:0" alt="historia">
+          <div class="flex-1">
+            <div class="font-medium text-lg">História</div>
+            <div class="text-sm text-gray-600">Da Antiguidade ao Brasil contemporâneo: processos históricos, revoluções, movimentos sociais e fontes com ênfase em síntese, cronologia e inter-relações entre eventos.</div>
+          </div>
+          <a href="#materia-historia" class="text-indigo-600 font-semibold">Abrir</a>
+        </div>
+
+        <div class="p-4 bg-white rounded shadow flex gap-3 items-center">
+          <img src="c:\Users\Geo\Pictures\bussola-e-lupa-perto-de-caderno-aberto_23-2147793451.avif" class="small-img" style="width:120px;flex-shrink:0" alt="geografia">
+          <div class="flex-1">
+            <div class="font-medium text-lg">Geografia</div>
+            <div class="text-sm text-gray-600">Espaço natural e humano, uso do solo, recursos hídricos e impactos ambientais com foco em análise de mapas, interpretações espaciais e problemas socioambientais atuais.</div>
+          </div>
+          <a href="#materia-geografia" class="text-indigo-600 font-semibold">Abrir</a>
+        </div>
+
+        <div class="p-4 bg-white rounded shadow flex gap-3 items-center">
+          <img src="c:\Users\Geo\Pictures\istockphoto-1203733319-612x612.jpg" class="small-img" style="width:120px;flex-shrink:0" alt="ciencias">
+          <div class="flex-1">
+            <div class="font-medium text-lg">Ciências da Natureza</div>
+            <div class="text-sm text-gray-600">Integra física e química  em problemas aplicados: reações, leis de Newton com questões que desenvolvem pensamento experimental e análise crítica.</div>
+          </div>
+          <a href="#materia-ciencias" class="text-indigo-600 font-semibold">Abrir</a>
+        </div>
+
+      </div>
+    </main>
+
+    <main id="biology" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <img class="cover mb-4" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600&auto=format&fit=crop&s=2f7b4ad3b6f9c4a2f6c5c8f6a6d3a1dd" alt="folhas">
+      <h2 class="text-2xl font-bold mb-3">Biologia — Reino Plantae e PANCs</h2>
+
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="text-indigo-700 font-semibold">Tópico 1 – O Reino Plantae e a Conquista do Ambiente Terrestre</h3>
+        <p>O <strong>Reino Plantae</strong> agrupa organismos eucariontes, multicelulares e, em sua maioria, autótrofos fotossintetizantes. Vamos aprofundar: além das características básicas, tratamos de estruturas adaptativas (cutícula, estômatos, tecido vascular) e suas implicações ecológicas — por exemplo, como morfologias diferentes influenciam a tolerância à seca ou ao sombreamento.</p>
+        <p>Adaptações importantes para a vida terrestre:</p>
+        <ul class="list-disc pl-5">
+          <li><strong>Cutícula e epiderme</strong> — reduzem a perda de água e protegem contra microrganismos.</li>
+          <li><strong>Xilema e floema</strong> — condução de água e nutrientes; entenda a pressão de transpiração e massas de água.</li>
+          <li><strong>Tecidos de sustentação</strong> — lenhina e colênquima garantem porte e resistência mecânica.</li>
+          <li><strong>Raízes/rizoides</strong> — fixação, absorção e interações com microrganismos do solo.</li>
+          <li><strong>Pólen e sementes</strong> — reprodução independente da água e estratégias de dispersão.</li>
+        </ul>
+      </section>
+
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="text-indigo-700 font-semibold">Tópico 2 – Fisiologia Vegetal</h3>
+        <p>Abordamos fotossíntese em detalhe (fases clara e escura), fatores limitantes, fotoperíodo e respostas fisiológicas ao estresse hídrico. Também explicamos como a transpiração regula temperatura e fluxo de seiva.</p>
+        <ul class="list-disc pl-5 mb-3">
+          <li><strong>Fotossíntese:</strong> CO₂ + H₂O + luz → C₆H₁₂O₆ + O₂ — entenda a cadeia de transporte de elétrons e produção de ATP/NADPH.</li>
+          <li><strong>Respiração celular:</strong> glicólise, ciclo de Krebs e cadeia respiratória.</li>
+          <li><strong>Transpiração:</strong> perda de água e transporte de seiva; influência na capilaridade.</li>
+        </ul>
+        <img src="https://images.unsplash.com/photo-1581093588401-6e75002a6b69?q=80&w=1200&auto=format&fit=crop&s=8d4f0b2d2f6a6c7a8b9c0d1e2f3a4b5c" class="small-img mb-2" alt="fotossintese">
+      </section>
+
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="text-indigo-700 font-semibold">Tópico 3 – PANCs</h3>
+        <p>Plantas Alimentícias Não Convencionais (PANCs) oferecem alternativas nutricionais e podem aumentar a resiliência de sistemas alimentares. Vamos ver exemplos, modos de preparo e riscos (como antinutrientes) e técnicas simples para incorporar PANCs na dieta.</p>
+
+        <div class="overflow-x-auto">
+          <table>
+            <tr><th>Espécie</th><th>Parte usada</th><th>Características</th></tr>
+            <tr><td><strong>Ora-pro-nóbis</strong> (<em>Pereskia aculeata</em>)</td><td>Folhas</td><td>Rica em proteínas e ferro; fácil cultivo.</td></tr>
+            <tr><td><strong>Taioba</strong> (<em>Colocasia esculenta</em>)</td><td>Folhas</td><td>Nutritiva; requer cozimento para reduzir oxalatos.</td></tr>
+            <tr><td><strong>Capuchinha</strong> (<em>Tropaeolum majus</em>)</td><td>Flores/folhas</td><td>Fonte de vitamina C; sabor picante, boas em saladas.</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">🎥 Vídeo educativo</h3>
+        <div class="bg-black rounded-lg overflow-hidden mb-3">
+          <iframe src="https://youtu.be/HGniqEb4548?si=_5DvMyDystTj0iUD" title="Reino Plantae - Brasil Escola" allowfullscreen></iframe>
+        </div>
+        <p class="text-sm text-gray-600">Se o vídeo não carregar, abra diretamente no YouTube.</p>
+      </section>
+
+      <div class="flex gap-3">
+        <a href="#quiz" class="flex-1 bg-indigo-600 text-white py-3 rounded text-center">Fazer Quiz</a>
+        <a href="#subjects" class="flex-1 py-3 border rounded text-center">Voltar</a>
+      </div>
+    </main>
+
+    <main id="materia-portugues" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-3">Português — Interpretação e Gramática</h2>
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <p>1. Interpretação Textual (Inferência Avançada)
+
+Em textos complexos, é fundamental distinguir entre contradição e complexificação (ou qualificação). Quando uma afirmação é seguida de exemplos contraditórios, isso não significa que o autor errou ou mudou de ideia. Na verdade, indica que a regra geral precisa ser matizada, reconhecendo casos especiais. Complexificar significa entender que a afirmação é válida apenas sob certas condições ou que o fenômeno tem exceções importantes. Esse é um nível de leitura crítica que vai além do superficial.
+
+2. Concordância Verbal (Verbo "Fazer")
+
+O verbo fazer apresenta uma regra importante quando usado de forma impessoal, referindo-se a tempo transcorrido ou fenômenos da natureza.
+
+Exemplos:
+
+Tempo transcorrido: "Faz três anos"
+
+Clima ou fenômeno natural: "Faz frio"
+
+Por ser impessoal, o verbo não tem sujeito e deve sempre ficar no singular (3ª pessoa).
+
+Certo: Faz três anos.
+
+Errado: Fazem três anos.
+
+3. Morfologia (Substantivos Abstratos)
+
+Para diferenciar substantivos abstratos de concretos, pense na dependência de existência:
+
+Substantivo Concreto: possui existência própria (real ou imaginária).
+
+Exemplos: mesa, gato, Saci, cadeira.
+
+Substantivo Abstrato: depende de outro ser para existir e nomeia:
+
+Qualidades: beleza, honestidade
+
+Sentimentos: amor, raiva
+
+Ações: estudo, corrida
+
+Conceitos/Estados: saúde, liberdade
+
+Exemplo: "Liberdade" é um estado ou condição, portanto é abstrata.
+
+4. Pontuação (Uso dos Dois-Pontos ":")
+
+Os dois-pontos (:) introduzem uma pausa de suspensão e expectativa, com funções principais:
+
+Introduzir enumeração:
+
+Exemplo: Comprei: pão, leite e queijo.
+
+Introduzir explicação ou esclarecimento:
+
+Exemplo: Atrasamos o prazo: choveu muito e a obra parou.
+
+Introduzir citação ou fala direta:
+
+Exemplo: O professor afirmou: "O estudo é a chave do sucesso."</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">🎥 Vídeo explicativo</h3>
+        <div class="bg-black rounded-lg overflow-hidden mb-3"><iframe src="https://www.youtube.com/embed/0XXp6ZX9JHc" title="Português - interpretação" allowfullscreen></iframe></div>
+        <p class="text-sm text-gray-600">Cole o link do vídeo (ID do YouTube) no iframe se quiser trocar.</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">Questões — Nível Avançado</h3>
+        <form id="quiz_portugues" class="space-y-4">
+          <div>
+            <p class="font-medium">1. (Inferência) Num texto que apresenta uma afirmação seguida de exemplos contraditórios, o leitor deve concluir que:</p>
+            <label class="block"><input type="radio" name="p1" value="A" class="mr-2"> o autor mudou de ideia.</label>
+            <label class="block"><input type="radio" name="p1" value="B" class="mr-2"> os exemplos provam definitivamente a afirmação.</label>
+            <label class="block"><input type="radio" name="p1" value="C" class="mr-2"> os exemplos qualificam ou complexificam a afirmação inicial.</label>
+            <label class="block"><input type="radio" name="p1" value="D" class="mr-2"> não há relação entre afirmação e exemplos.</label>
+          </div>
+
+          <div>
+            <p class="font-medium">2. (Gramática) Em "Fazem três anos que estudo aqui", o verbo "fazer" está:</p>
+            <label class="block"><input type="radio" name="p2" value="A" class="mr-2"> flexionado para concordar com "três anos".</label>
+            <label class="block"><input type="radio" name="p2" value="B" class="mr-2"> impessoal, sem variar com numeral.</label>
+            <label class="block"><input type="radio" name="p2" value="C" class="mr-2"> incorreto; o certo é "Faz três anos".</label>
+            <label class="block"><input type="radio" name="p2" value="D" class="mr-2"> verbo transitivo indireto.</label>
+          </div>
+
+          <div>
+            <p class="font-medium">3. (Vocabulário) Assinale a alternativa em que a palavra está corretamente classificada como substantivo abstrato:</p>
+            <label class="block"><input type="radio" name="p3" value="A" class="mr-2"> liberdade</label>
+            <label class="block"><input type="radio" name="p3" value="B" class="mr-2"> carro</label>
+            <label class="block"><input type="radio" name="p3" value="C" class="mr-2"> montanha</label>
+            <label class="block"><input type="radio" name="p3" value="D" class="mr-2"> cadeira</label>
+          </div>
+
+          <div>
+            <p class="font-medium">4. (Pontuação) Em qual caso o uso dos dois-pontos é adequado?</p>
+            <label class="block"><input type="radio" name="p4" value="A" class="mr-2"> Para iniciar uma citação longa após uma frase completa.</label>
+            <label class="block"><input type="radio" name="p4" value="B" class="mr-2"> Antes de uma conjunção coordenativa.</label>
+            <label class="block"><input type="radio" name="p4" value="C" class="mr-2"> Entre sujeito e verbo.</label>
+            <label class="block"><input type="radio" name="p4" value="D" class="mr-2"> Para separar artigo e substantivo.</label>
+          </div>
+
+          <button type="button" id="btnCheck_portugues" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Enviar Respostas</button>
+        </form>
+        <div id="result_portugues" class="mt-3 font-bold hidden-screen"></div>
+      </section>
+
+      <div class="flex gap-3">
+        <a href="#subjects" class="flex-1 py-3 border rounded text-center">Voltar</a>
+      </div>
+    </main>
+
+    <main id="materia-matematica" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-3">Matemática — Porcentagem, Regra de Três e Geometria</h2>
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <p>1. Porcentagens e Variações Sucessivas
+
+Um erro comum é pensar que um aumento e uma redução de mesmo percentual se anulam. Isso não é verdade, pois a base de cálculo muda a cada operação.
+
+Raciocínio com multiplicadores:
+
+Para resolver, podemos usar os Fatores de Multiplicação (FM):
+
+Aumento de 
+𝑃
+%
+P%: FM = 1 + P/100
+
+Redução de 
+𝑃
+%
+P%: FM = 1 - P/100
+
+Se o preço inicial é 
+𝑃
+0
+P
+0
+	​
+
+:
+
+Redução de 20%: 
+𝑃
+1
+=
+𝑃
+0
+×
+(
+1
+−
+0
+,
+20
+)
+=
+𝑃
+0
+×
+0
+,
+80
+P
+1
+	​
+
+=P
+0
+	​
+
+×(1−0,20)=P
+0
+	​
+
+×0,80
+
+Aumento de 20%: o aumento é aplicado sobre 
+𝑃
+1
+P
+1
+	​
+
+, o novo valor: 
+𝑃
+𝑓
+𝑖
+𝑛
+𝑎
+𝑙
+=
+𝑃
+1
+×
+(
+1
++
+0
+,
+20
+)
+=
+𝑃
+1
+×
+1
+,
+20
+P
+final
+	​
+
+=P
+1
+	​
+
+×(1+0,20)=P
+1
+	​
+
+×1,20
+
+Portanto, o resultado final será:
+
+𝑃
+𝑓
+𝑖
+𝑛
+𝑎
+𝑙
+=
+𝑃
+0
+×
+(
+0
+,
+80
+×
+1
+,
+20
+)
+=
+𝑃
+0
+×
+0
+,
+96
+P
+final
+	​
+
+=P
+0
+	​
+
+×(0,80×1,20)=P
+0
+	​
+
+×0,96
+
+Como 0,96 é menor que 1, o preço final é 4% menor que o original.
+
+2. Proporcionalidade e Regra de Três
+
+A Regra de Três estabelece uma proporção entre duas grandezas.
+
+Resolução por razão:
+Considere a proporção:
+
+7
+21
+=
+𝑥
+84
+21
+7
+	​
+
+=
+84
+x
+	​
+
+
+Para resolver, podemos usar multiplicação cruzada ou encontrar a razão de proporcionalidade:
+
+Razão de 7 para 21: 
+21
+÷
+7
+=
+3
+21÷7=3. Ou seja, 7 está para 21 na proporção de 1 para 3.
+
+Portanto, 
+𝑥
+x também deve estar para 84 na proporção de 1 para 3:
+
+𝑥
+84
+=
+1
+3
+  
+⟹
+  
+3
+⋅
+𝑥
+=
+84
+  
+⟹
+  
+𝑥
+=
+84
+÷
+3
+=
+28
+84
+x
+	​
+
+=
+3
+1
+	​
+
+⟹3⋅x=84⟹x=84÷3=28
+
+Assim, x = 28.
+
+3. Fórmulas de Geometria Plana
+
+Área do Triângulo:
+A área 
+𝐴
+A de um triângulo é dada por:
+
+𝐴
+=
+Base
+×
+Altura
+2
+A=
+2
+Base×Altura
+	​
+
+
+Se a base 
+𝑏
+=
+10
+b=10 e a altura 
+ℎ
+=
+6
+h=6, temos:
+
+𝐴
+=
+10
+×
+6
+2
+=
+60
+2
+=
+30
+A=
+2
+10×6
+	​
+
+=
+2
+60
+	​
+
+=30
+
+Perímetro do Quadrado:
+O perímetro 
+𝑃
+P é a medida do contorno da figura. Um quadrado possui quatro lados iguais 
+𝐿
+L:
+
+𝑃
+=
+4
+×
+𝐿
+P=4×L
+
+Se 
+𝐿
+=
+7
+L=7, então:
+
+𝑃
+=
+4
+×
+7
+=
+28
+P=4×7=28</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">🎥 Vídeo explicativo</h3>
+        <div class="bg-black rounded-lg overflow-hidden mb-3"><iframe src="https://www.youtube.com/embed/qcPHo8x1PYo" title="Matemática - porcentagem" allowfullscreen></iframe></div>
+        <p class="text-sm text-gray-600">Troque o ID do vídeo no iframe se quiser outro.</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">Questões — Nível Avançado</h3>
+        <form id="quiz_matematica" class="space-y-4">
+          <div>
+            <p class="font-medium">1. Se um preço é reduzido 20% e depois aumentado 20%, o preço final é:</p>
+            <label class="block"><input type="radio" name="m1" value="A" class="mr-2"> Igual ao original</label>
+            <label class="block"><input type="radio" name="m1" value="B" class="mr-2"> Menor que o original</label>
+            <label class="block"><input type="radio" name="m1" value="C" class="mr-2"> Maior que o original</label>
+            <label class="block"><input type="radio" name="m1" value="D" class="mr-2"> Depende do valor inicial</label>
+          </div>
+
+          <div>
+            <p class="font-medium">2. Regra de três: 7 ↔ 21 ; x ↔ 84. x = ?</p>
+            <label class="block"><input type="radio" name="m2" value="A" class="mr-2"> 280</label>
+            <label class="block"><input type="radio" name="m2" value="B" class="mr-2"> 32</label>
+            <label class="block"><input type="radio" name="m2" value="C" class="mr-2"> 28</label>
+            <label class="block"><input type="radio" name="m2" value="D" class="mr-2"> 12</label>
+          </div>
+
+          <div>
+            <p class="font-medium">3. Área do triângulo com base 10 e altura 6:</p>
+            <label class="block"><input type="radio" name="m3" value="A" class="mr-2"> 16</label>
+            <label class="block"><input type="radio" name="m3" value="B" class="mr-2"> 30</label>
+            <label class="block"><input type="radio" name="m3" value="C" class="mr-2"> 60</label>
+            <label class="block"><input type="radio" name="m3" value="D" class="mr-2"> 6</label>
+          </div>
+
+          <div>
+            <p class="font-medium">4. Perímetro de um quadrado de lado 7:</p>
+            <label class="block"><input type="radio" name="m4" value="A" class="mr-2"> 21</label>
+            <label class="block"><input type="radio" name="m4" value="B" class="mr-2"> 24</label>
+            <label class="block"><input type="radio" name="m4" value="C" class="mr-2"> 28</label>
+            <label class="block"><input type="radio" name="m4" value="D" class="mr-2"> 49</label>
+          </div>
+
+          <button type="button" id="btnCheck_matematica" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Enviar Respostas</button>
+        </form>
+        <div id="result_matematica" class="mt-3 font-bold hidden-screen"></div>
+      </section>
+
+      <div class="flex gap-3">
+        <a href="#subjects" class="flex-1 py-3 border rounded text-center">Voltar</a>
+      </div>
+    </main>
+
+    <main id="materia-historia" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-3">História — Da Antiguidade ao Brasil</h2>
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <p>Escrita Cuneiforme
+A escrita cuneiforme foi criada pelos sumérios, que viviam na região da Mesopotâmia, atual Iraque, por volta de 3500 a.C. O termo "cuneiforme" vem do latim e significa "em forma de cunha", devido ao formato dos sinais gravados em tabletes de argila úmida. É considerada uma das formas de escrita mais antigas da humanidade.
+
+Queda do Império Romano do Ocidente
+O ano 476 d.C. marca o fim da Idade Antiga e o início da Idade Média. Nesse ano, o último imperador romano do Ocidente, Rômulo Augústulo, foi deposto pelo chefe germânico Odoacro. É importante destacar que o Império Romano do Oriente, conhecido como Bizantino, continuou existindo até 1453.
+
+Abolição da Escravidão no Brasil
+A escravidão no Brasil foi oficialmente abolida em 13 de maio de 1888, com a assinatura da Lei Áurea pela Princesa Isabel, então regente do Império. Esse evento representou o ponto culminante de um longo processo de lutas e pressões do movimento abolicionista.
+
+Início da Revolução Industrial
+A Primeira Revolução Industrial teve início na Inglaterra, na segunda metade do século XVIII, por volta de 1760. A industrialização foi impulsionada por fatores como a abundância de carvão, o acúmulo de capital, a disponibilidade de mão de obra e as inovações tecnológicas, como máquinas a vapor e teares mecânicos, especialmente na indústria têxtil. A Inglaterra tornou-se assim o berço da industrialização moderna.</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">🎥 Vídeo explicativo</h3>
+        <div class="bg-black rounded-lg overflow-hidden mb-3"><iframe src="https://www.youtube.com/embed/aFvN3JxbYlU" title="História - resumo" allowfullscreen></iframe></div>
+        <p class="text-sm text-gray-600">Substitua o vídeo se desejar.</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">Questões — Nível Avançado</h3>
+        <form id="quiz_historia" class="space-y-4">
+          <div>
+            <p class="font-medium">1. Quem criou a escrita cuneiforme?</p>
+            <label class="block"><input type="radio" name="h1" value="A" class="mr-2"> Egípcios</label>
+            <label class="block"><input type="radio" name="h1" value="B" class="mr-2"> Sumérios</label>
+            <label class="block"><input type="radio" name="h1" value="C" class="mr-2"> Gregos</label>
+            <label class="block"><input type="radio" name="h1" value="D" class="mr-2"> Romanos</label>
+          </div>
+
+          <div>
+            <p class="font-medium">2. Em que ano caiu o Império Romano do Ocidente?</p>
+            <label class="block"><input type="radio" name="h2" value="A" class="mr-2"> 1453</label>
+            <label class="block"><input type="radio" name="h2" value="B" class="mr-2"> 476</label>
+            <label class="block"><input type="radio" name="h2" value="C" class="mr-2"> 330</label>
+            <label class="block"><input type="radio" name="h2" value="D" class="mr-2"> 1492</label>
+          </div>
+
+          <div>
+            <p class="font-medium">3. Em que ano ocorreu a abolição da escravidão no Brasil?</p>
+            <label class="block"><input type="radio" name="h3" value="A" class="mr-2"> 1822</label>
+            <label class="block"><input type="radio" name="h3" value="B" class="mr-2"> 1888</label>
+            <label class="block"><input type="radio" name="h3" value="C" class="mr-2"> 1910</label>
+            <label class="block"><input type="radio" name="h3" value="D" class="mr-2"> 1808</label>
+          </div>
+
+          <div>
+            <p class="font-medium">4. Onde começou a Revolução Industrial?</p>
+            <label class="block"><input type="radio" name="h4" value="A" class="mr-2"> França</label>
+            <label class="block"><input type="radio" name="h4" value="B" class="mr-2"> Alemanha</label>
+            <label class="block"><input type="radio" name="h4" value="C" class="mr-2"> Inglaterra</label>
+            <label class="block"><input type="radio" name="h4" value="D" class="mr-2"> Estados Unidos</label>
+          </div>
+
+          <button type="button" id="btnCheck_historia" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Enviar Respostas</button>
+        </form>
+        <div id="result_historia" class="mt-3 font-bold hidden-screen"></div>
+      </section>
+
+      <div class="flex gap-3">
+        <a href="#subjects" class="flex-1 py-3 border rounded text-center">Voltar</a>
+      </div>
+    </main>
+
+    <main id="materia-geografia" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-3">Geografia — Espaço Natural e Humano</h2>
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <p>1. Camada Essencial para a Vida: Atmosfera
+Resposta Correta: Atmosfera
+
+Explicação: A Atmosfera é a camada gasosa que envolve o planeta Terra. Ela é essencial por diversas razões:
+
+Fornece o oxigênio necessário para a respiração da maioria dos seres vivos.
+
+Regula a temperatura do planeta através do efeito estufa natural, evitando variações extremas que tornariam a vida insuportável.
+
+Atua como um filtro, absorvendo a maior parte da perigosa radiação ultravioleta do Sol (graças à camada de ozônio).
+
+2. Aquífero Guarani: Reserva Subterrânea
+Resposta Correta: Um reservatório de água doce subterrânea
+
+Explicação: O Aquífero Guarani é um dos maiores sistemas de água subterrânea do mundo. Ele abrange territórios no Brasil, Paraguai, Uruguai e Argentina. A palavra "aquífero" refere-se a uma formação geológica subterrânea que armazena e transmite água. É uma reserva estratégica de água doce para as próximas gerações.
+
+3. Região Mais Industrializada do Brasil: Sudeste
+Resposta Correta: Sudeste
+
+Explicação: A região Sudeste (principalmente São Paulo, Rio de Janeiro e Minas Gerais) concentra a maior parte do Parque Industrial Brasileiro desde o século XX. Essa concentração se deve a fatores históricos (café, infraestrutura ferroviária), facilidade de acesso a portos, maior mercado consumidor e um grande volume de capital e mão de obra.
+
+4. Bioma com Desmatamento Mais Expressivo: Amazônia
+Resposta Correta: Amazônia
+
+Explicação: O bioma Amazônia (Floresta Amazônica) é o que apresenta historicamente o maior volume de desmatamento no Brasil, devido à expansão da agropecuária (pastagens) e à exploração madeireira, sendo um ponto central nos debates sobre crise climática e biodiversidade. É crucial notar que o Cerrado tem, nos últimos anos, apresentado altas taxas de desmatamento devido à expansão da fronteira agrícola para a produção de commodities (como a soja).</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">🎥 Vídeo explicativo</h3>
+        <div class="bg-black rounded-lg overflow-hidden mb-3"><iframe src="https://www.youtube.com/embed/5Z6kTpsuRW4" title="Geografia - resumo" allowfullscreen></iframe></div>
+        <p class="text-sm text-gray-600">Substitua o vídeo se quiser outro conteúdo.</p>
+      </section>
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">Questões — Nível Avançado</h3>
+        <form id="quiz_geografia" class="space-y-4">
+          <div>
+            <p class="font-medium">1. Qual camada é essencial para a vida na Terra?</p>
+            <label class="block"><input type="radio" name="g1" value="A" class="mr-2"> Litosfera</label>
+            <label class="block"><input type="radio" name="g1" value="B" class="mr-2"> Hidrósfera</label>
+            <label class="block"><input type="radio" name="g1" value="C" class="mr-2"> Atmosfera</label>
+            <label class="block"><input type="radio" name="g1" value="D" class="mr-2"> Crosta</label>
+          </div>
+
+          <div>
+            <p class="font-medium">2. O Aquífero Guarani é:</p>
+            <label class="block"><input type="radio" name="g2" value="A" class="mr-2"> Um deserto</label>
+            <label class="block"><input type="radio" name="g2" value="B" class="mr-2"> Um rio</label>
+            <label class="block"><input type="radio" name="g2" value="C" class="mr-2"> Um reservatório de água doce subterrânea</label>
+            <label class="block"><input type="radio" name="g2" value="D" class="mr-2"> Uma montanha</label>
+          </div>
+
+          <div>
+            <p class="font-medium">3. Região mais industrializada do Brasil:</p>
+            <label class="block"><input type="radio" name="g3" value="A" class="mr-2"> Norte</label>
+            <label class="block"><input type="radio" name="g3" value="B" class="mr-2"> Nordeste</label>
+            <label class="block"><input type="radio" name="g3" value="C" class="mr-2"> Sudeste</label>
+            <label class="block"><input type="radio" name="g3" value="D" class="mr-2"> Centro-Oeste</label>
+          </div>
+
+          <div>
+            <p class="font-medium">4. Em que bioma o desmatamento é mais expressivo?</p>
+            <label class="block"><input type="radio" name="g4" value="A" class="mr-2"> Cerrado</label>
+            <label class="block"><input type="radio" name="g4" value="B" class="mr-2"> Caatinga</label>
+            <label class="block"><input type="radio" name="g4" value="C" class="mr-2"> Amazônia</label>
+            <label class="block"><input type="radio" name="g4" value="D" class="mr-2"> Mata Atlântica</label>
+          </div>
+
+          <button type="button" id="btnCheck_geografia" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Enviar Respostas</button>
+        </form>
+        <div id="result_geografia" class="mt-3 font-bold hidden-screen"></div>
+      </section>
+
+      <div class="flex gap-3">
+        <a href="#subjects" class="flex-1 py-3 border rounded text-center">Voltar</a>
+      </div>
+    </main>
+
+    <main id="materia-ciencias" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-3">Ciências da Natureza — Física, Química e Biologia</h2>
+      <section class="content bg-white p-5 rounded-2xl shadow mb-6">
+        <p>Física – Força Resultante
+
+A Força Resultante (
+𝐹
+𝑅
+F
+R
+	​
+
+) é a força equivalente que substitui um conjunto de forças aplicadas sobre um corpo, produzindo o mesmo efeito sobre o movimento.
+Por ser uma grandeza vetorial, possui:
+
+módulo
+
+direção
+
+sentido
+
+A soma entre forças é sempre vetorial, não apenas numérica.
+
+Pela Segunda Lei de Newton, a força resultante determina a aceleração do corpo:
+
+𝐹
+⃗
+𝑅
+=
+𝑚
+⋅
+𝑎
+⃗
+F
+R
+	​
+
+=m⋅
+a
+
+
+
+
+
+🔬 Química – Ligação Iônica
+
+A Ligação Iônica ocorre devido à atração eletrostática entre íons de cargas opostas.
+
+Metais → perdem elétrons → formam cátions (positivos)
+
+Ametais → ganham elétrons → formam ânions (negativos)
+
+Quando cátion e ânion se atraem, forma-se o composto iônico, geralmente sólido, solúvel em água e com altos pontos de fusão.
+
+
+
+⚗️ Química – Escala de pH
+
+A escala de pH mede o grau de acidez ou basicidade de uma solução aquosa.
+Como é uma escala logarítmica, pequenas variações representam grandes mudanças na concentração de íons 
+𝐻
++
+H
++
+.
+
+pH < 7 → solução ácida
+
+pH = 7 → solução neutra
+
+pH > 7 → solução básica / alcalina
+
+🧾 Resumo Final
+
+A Força Resultante determina a aceleração de um corpo e é a soma vetorial das forças.
+
+A Ligação Iônica ocorre entre um metal e um ametal através da atração eletrostática entre íons.
+
+A Mitose gera duas células-filhas idênticas, mantendo o mesmo número de cromossomos.
+
+Soluções com pH menor que 7 são ácidas, igual a 7 são neutras, e acima de 7 são básicas..</p>
+      </section>
+
+      <iframe width="560" height="315"
+src="https://youtu.be/QAA5D1ttPqY?si=Sm69q76jwHujEK9Z"
+title="YouTube video player" frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen></iframe>
+
+
+      <section class="bg-white p-5 rounded-2xl shadow mb-6">
+        <h3 class="font-semibold text-indigo-700 mb-2">Questões — Nível Avançado</h3>
+        <form id="quiz_ciencias" class="space-y-4">
+          <div>
+            <p class="font-medium">1. Força resultante é:</p>
+            <label class="block"><input type="radio" name="c1" value="A" class="mr-2"> Produto das forças</label>
+            <label class="block"><input type="radio" name="c1" value="B" class="mr-2"> Soma vetorial das forças</label>
+            <label class="block"><input type="radio" name="c1" value="C" class="mr-2"> Diferença entre massas</label>
+            <label class="block"><input type="radio" name="c1" value="D" class="mr-2"> Força de atrito apenas</label>
+          </div>
+
+          <div>
+            <p class="font-medium">2. Ligação iônica ocorre entre:</p>
+            <label class="block"><input type="radio" name="c2" value="A" class="mr-2"> Metais entre si</label>
+            <label class="block"><input type="radio" name="c2" value="B" class="mr-2"> Metal + ametal</label>
+            <label class="block"><input type="radio" name="c2" value="C" class="mr-2"> Ametais entre si</label>
+            <label class="block"><input type="radio" name="c2" value="D" class="mr-2"> Gases nobres</label>
+          </div>
+
+       <div>
+  <p class="font-medium">
+    3. Um corpo está submetido simultaneamente a três forças coplanares:
+    <br><br>
+    𝐹⃗1 = 10 N (horizontal para a direita)<br>
+    𝐹⃗2 = 6 N (horizontal para a esquerda)<br>
+    𝐹⃗3 = 8 N (vertical para cima)<br><br>
+    Sabendo que a massa do corpo é 4 kg, qual será a aceleração resultante?
+  </p>
+
+  <label class="block">
+    <input type="radio" name="c3" value="A" class="mr-2"> 2 m/s² para a direita
+  </label>
+  <label class="block">
+    <input type="radio" name="c3" value="B" class="mr-2" checked> 1 m/s² com direção diagonal para cima e para a direita
+  </label>
+  <label class="block">
+    <input type="radio" name="c3" value="C" class="mr-2"> 0,5 m/s² vertical para cima
+  </label>
+  <label class="block">
+    <input type="radio" name="c3" value="D" class="mr-2"> 4 m/s² horizontal para a direita
+  </label>
+</div>
+
+          <div>
+            <p class="font-medium">4. pH < 7 indica:</p>
+            <label class="block"><input type="radio" name="c4" value="A" class="mr-2"> Solução neutra</label>
+            <label class="block"><input type="radio" name="c4" value="B" class="mr-2"> Solução básica</label>
+            <label class="block"><input type="radio" name="c4" value="C" class="mr-2"> Solução ácida</label>
+            <label class="block"><input type="radio" name="c4" value="D" class="mr-2"> Solução alcalina</label>
+          </div>
+
+          <button type="button" id="btnCheck_ciencias" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Enviar Respostas</button>
+        </form>
+        <div id="result_ciencias" class="mt-3 font-bold hidden-screen"></div>
+      </section>
+
+      <div class="flex gap-3">
+        <a href="#subjects" class="flex-1 py-3 border rounded text-center">Voltar</a>
+      </div>
+    </main>
+
+    <main id="quiz" class="p-6 hidden-screen bg-gray-50 min-h-[520px]">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Quiz — Geral Avançado</h2>
+        <div class="text-sm text-gray-600">Teste seus conhecimentos e ganhe pontos para o Ranking</div>
+      </div>
+
+      <form id="quizForm" class="space-y-5">
+        <div class="bg-white p-4 rounded shadow">
+          <p class="font-medium mb-2">1. Em relação ao cultivo de plantas, qual prática reduz erosão e melhora fertilidade do solo?</p>
+          <label class="block mb-1"><input type="radio" name="q1" value="A" class="mr-2"> Monocultura intensiva</label>
+          <label class="block mb-1"><input type="radio" name="q1" value="B" class="mr-2"> Plantio direto e rotação de culturas</label>
+          <label class="block mb-1"><input type="radio" name="q1" value="C" class="mr-2"> Remoção da matéria orgânica</label>
+          <label class="block"><input type="radio" name="q1" value="D" class="mr-2"> Uso exclusivo de fertilizantes solúveis</label>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <p class="font-medium mb-2">2. Sobre monocultura, é correto afirmar que:</p>
+          <label class="block mb-1"><input type="radio" name="q2" value="A" class="mr-2"> aumenta biodiversidade local</label>
+          <label class="block mb-1"><input type="radio" name="q2" value="B" class="mr-2"> diminui resiliência a pragas e empobrece o solo</label>
+          <label class="block mb-1"><input type="radio" name="q2" value="C" class="mr-2"> sempre é a prática mais sustentável</label>
+          <label class="block"><input type="radio" name="q2" value="D" class="mr-2"> reduz o risco de doenças</label>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <p class="font-medium mb-2">3. Sobre trigo (cereal), é correto:</p>
+          <label class="block mb-1"><input type="radio" name="q3" value="A" class="mr-2"> É plantado em larga escala nos EUA e Canadá</label>
+          <label class="block mb-1"><input type="radio" name="q3" value="B" class="mr-2"> Não é cultivado fora do hemisfério norte</label>
+          <label class="block mb-1"><input type="radio" name="q3" value="C" class="mr-2"> É a mesma espécie do milho</label>
+          <label class="block"><input type="radio" name="q3" value="D" class="mr-2"> Nunca é utilizado na alimentação humana</label>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <p class="font-medium mb-2">4. Sobre PANCs, é correto afirmar:</p>
+          <label class="block mb-1"><input type="radio" name="q4" value="A" class="mr-2"> São sempre tóxicas</label>
+          <label class="block mb-1"><input type="radio" name="q4" value="B" class="mr-2"> Podem reduzir insegurança alimentar quando usadas adequadamente</label>
+          <label class="block"><input type="radio" name="q4" value="C" class="mr-2"> Não possuem valor nutricional</label>
+        </div>
+
+        <button type="button" id="btnCheck" class="w-full bg-indigo-600 text-white py-3 rounded font-semibold">Enviar Respostas</button>
+      </form>
+
+      <div id="quizResult" class="mt-5 text-center text-lg font-bold hidden-screen"></div>
+      <a href="#home" class="mt-4 inline-block w-full py-3 border rounded text-center">Voltar</a>
+    </main>
+    
+    <main id="ranking" class="p-6 hidden-screen bg-gray-50 min-h-[520px] overflow-y-auto">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">🏆 Ranking de Evolução</h2>
+        <div class="muted text-sm">Pontos acumulados por atividade (local)</div>
+      </div>
+
+      <section class="card mb-4">
+        <div class="flex justify-between items-center mb-3">
+          <div>
+            <div class="text-sm muted">Seu progresso</div>
+            <div id="rankingUserSummary" class="font-medium">—</div>
+          </div>
+          <div>
+            <button id="btnRefreshRanking" class="px-3 py-2 bg-indigo-600 text-white rounded">Atualizar</button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table id="rankingTable">
+            <thead>
+              <tr><th>Posição</th><th>Usuário</th><th>Pontos</th><th>Última pontuação</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <a href="#home" class="inline-block w-full py-3 border rounded text-center">Voltar</a>
+    </main>
+
+    <main id="profile" class="p-6 hidden-screen bg-gray-50 min-h-[520px]">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Perfil</h2>
+        <a href="#home" class="px-3 py-1 rounded border">Voltar</a>
+      </div>
+
+      <div class="bg-white p-4 rounded shadow mb-4 flex gap-4 items-center">
+        <img id="profileAvatar" class="avatar" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=400&auto=format&fit=crop&s=2f7b4ad3b6f9c4a2f6c5c8f6a6d3a1dd" alt="avatar">
+        <div>
+          <div id="userNameDisplay" class="font-medium">Usuário</div>
+          <div id="userEmailDisplay" class="text-sm text-gray-600">—</div>
+          <div id="userPointsDisplay" class="text-sm muted mt-1">Pontos: —</div>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded shadow mb-4">
+        <label class="block text-sm font-medium mb-2">Atualizar foto de perfil</label>
+        <input id="avatarInput" type="file" accept="image/*" class="mb-3">
+        <button id="btnUpload" class="px-4 py-2 bg-indigo-600 text-white rounded">Enviar foto</button>
+      </div>
+
+      <div id="lastScore" class="mb-4 text-sm text-gray-700 hidden-screen">Última pontuação: <span id="lastScoreValue"></span></div>
+      <button id="btnLogout" class="mt-2 px-4 py-2 text-red-600 w-full border rounded">Sair</button>
+    </main>
+
+  </div>
+
+  <script>
+  
+    const SCREENS = ['login','signup','home','subjects','biology','materia-portugues','materia-matematica','materia-historia','materia-geografia','materia-ciencias','quiz','ranking','profile'];
+    function showScreenById(id){
+      SCREENS.forEach(s=>{
+        const el = document.getElementById(s);
+        if(el) el.classList.toggle('hidden-screen', s !== id);
+      });
+      
+      const navbar = document.getElementById('navbar');
+      if(id === 'login' || id === 'signup') navbar.classList.add('hidden-screen');
+      else navbar.classList.remove('hidden-screen');
+      
+      updateNavUser();
+      
+      if(id === 'ranking') renderRanking();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function routeToHash(){
+      
+      let h = location.hash.replace('#','') || 'login';
+      if(!SCREENS.includes(h)) h = 'login';
+      showScreenById(h);
+    }
+
+    window.addEventListener('hashchange', routeToHash);
+
+    function getUserKey(email){ return `user_${email.toLowerCase()}`; }
+    function getLoggedUserEmail(){ return localStorage.getItem('loggedUser') || null; }
+    function setLoggedUser(email){ if(email) localStorage.setItem('loggedUser', email.toLowerCase()); else localStorage.removeItem('loggedUser'); }
+
+    document.getElementById('btnSignup').addEventListener('click', ()=>{
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('signupPass').value;
+      if(!name || !email || !pass){ alert('Preencha todos os campos.'); return; }
+      if(localStorage.getItem(getUserKey(email))){ alert('E-mail já cadastrado. Faça login.'); location.hash = '#login'; return; }
+      const user = { name, email, pass, avatar: null };
+      localStorage.setItem(getUserKey(email), JSON.stringify(user));
+     
+      localStorage.setItem(`points_${email}`, '0');
+      alert('Conta criada com sucesso! Faça login.');
+      location.hash = '#login';
+    });
+
+    document.getElementById('btnLogin').addEventListener('click', ()=>{
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPass').value;
+      if(!email || !pass){ alert('Preencha e-mail e senha.'); return; }
+      const raw = localStorage.getItem(getUserKey(email));
+      if(!raw){ alert('Usuário não encontrado. Cadastre-se.'); location.hash = '#signup'; return; }
+      const user = JSON.parse(raw);
+      if(user.pass !== pass){ alert('Senha incorreta.'); return; }
+      
+      setLoggedUser(email);
+      
+      document.getElementById('userNameDisplay').textContent = user.name;
+      document.getElementById('userEmailDisplay').textContent = user.email;
+      if(user.avatar){
+        document.getElementById('profileAvatar').src = user.avatar;
+        document.getElementById('navAvatar').src = user.avatar;
+        document.getElementById('homeAvatar').src = user.avatar;
+      }
+   
+      const score = localStorage.getItem(`score_${email}`); if(score){
+        document.getElementById('lastScoreValue').textContent = score;
+        document.getElementById('lastScore').classList.remove('hidden-screen');
+      } else { document.getElementById('lastScore').classList.add('hidden-screen'); }
+      
+      const pts = Number(localStorage.getItem(`points_${email}`) || 0);
+      document.getElementById('userPointsDisplay').textContent = `Pontos: ${pts}`;
+      location.hash = '#home';
+    });
+
+   
+    document.getElementById('btnLogout')?.addEventListener('click', ()=>{
+      setLoggedUser(null);
+      document.getElementById('userNameDisplay').textContent = 'Usuário';
+      document.getElementById('userEmailDisplay').textContent = '—';
+      document.getElementById('profileAvatar').src = document.getElementById('navAvatar').src = 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=400&auto=format&fit=crop&s=2f7b4ad3b6f9c4a2f6c5c8f6a6d3a1dd';
+      location.hash = '#login';
+    });
+
+    document.getElementById('btnUpload')?.addEventListener('click', ()=>{
+      const input = document.getElementById('avatarInput');
+      if(!input || !input.files || !input.files[0]){ alert('Escolha uma imagem primeiro.'); return; }
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const data = e.target.result;
+        const email = getLoggedUserEmail();
+        if(!email){ alert('Faça login para enviar a foto.'); return; }
+        const key = getUserKey(email);
+        const raw = localStorage.getItem(key);
+        if(!raw) return;
+        const user = JSON.parse(raw);
+        user.avatar = data;
+        localStorage.setItem(key, JSON.stringify(user));
+      
+        document.getElementById('profileAvatar').src = data;
+        document.getElementById('navAvatar').src = data;
+        document.getElementById('homeAvatar').src = data;
+        document.getElementById('greetName').textContent = user.name;
+        document.getElementById('greet').classList.remove('hidden');
+        alert('Foto atualizada!');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function addPointsToUser(email, pointsToAdd){
+      if(!email) return;
+      const key = `points_${email}`;
+      const prev = Number(localStorage.getItem(key) || 0);
+      const updated = prev + Number(pointsToAdd);
+      localStorage.setItem(key, String(updated));
+      return updated;
+    }
+
+    function getAllUsersWithPoints(){
+      const list = [];
+      for(let i=0;i<localStorage.length;i++){
+        const k = localStorage.key(i);
+        if(k && k.startsWith('user_')){
+          const email = k.replace('user_','');
+          try{
+            const raw = localStorage.getItem(k);
+            const u = JSON.parse(raw);
+            const pts = Number(localStorage.getItem(`points_${email}`) || 0);
+            const last = localStorage.getItem(`score_${email}`) || '—';
+            list.push({ email, name: u.name || email, avatar: u.avatar || null, points: pts, lastScore: last });
+          }catch(e){}
+        }
+      }
+  
+      list.sort((a,b)=> b.points - a.points);
+      return list;
+    }
+
+    function renderRanking(){
+      const tbody = document.querySelector('#rankingTable tbody');
+      tbody.innerHTML = '';
+      const users = getAllUsersWithPoints();
+      users.forEach((u,index)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${index+1}</td>
+                        <td style="display:flex;gap:8px;align-items:center">
+                          <img src="${u.avatar || 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=80&auto=format&fit=crop&s=2f7b4ad3b6f9c4a2f6c5c8f6a6d3a1dd'}" style="width:36px;height:36px;border-radius:9999px;object-fit:cover;margin-right:8px" alt="a"/>
+                          <div><div style="font-weight:600">${u.name}</div><div style="font-size:12px;color:#6b7280">${u.email}</div></div>
+                        </td>
+                        <td>${u.points}</td>
+                        <td>${u.lastScore}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      const email = getLoggedUserEmail();
+      if(email){
+        const pts = Number(localStorage.getItem(`points_${email}`) || 0);
+        const last = localStorage.getItem(`score_${email}`) || '—';
+        document.getElementById('rankingUserSummary').textContent = `${getUserDisplayName(email)} — ${pts} pts — Último: ${last}`;
+      } else {
+        document.getElementById('rankingUserSummary').textContent = 'Faça login para ver seus pontos e competir no ranking.';
+      }
+    }
+
+    document.getElementById('btnRefreshRanking')?.addEventListener('click', renderRanking);
+
+    function getUserDisplayName(email){
+      const raw = localStorage.getItem(getUserKey(email));
+      if(!raw) return email;
+      try{ return JSON.parse(raw).name || email; }catch(e){ return email; }
+    }
+
+    const gabarito = { q1: 'B', q2: 'B', q3: 'A', q4: 'B' };
+    document.getElementById('btnCheck')?.addEventListener('click', ()=>{
+      const form = document.getElementById('quizForm');
+      let acertos = 0;
+      for(const q in gabarito){
+        const sel = form.querySelector(`input[name="${q}"]:checked`);
+        if(sel && sel.value === gabarito[q]) acertos++;
+      }
+      const total = Object.keys(gabarito).length;
+      const resEl = document.getElementById('quizResult');
+      resEl.textContent = `Você acertou ${acertos} de ${total} questões.`;
+      resEl.classList.remove('hidden-screen');
+     
+      const pts = acertos * 10;
+      const email = getLoggedUserEmail();
+      if(email){
+        
+        localStorage.setItem(`score_${email}`, `${acertos}/${total}`);
+        const totalPoints = addPointsToUser(email, pts);
+        document.getElementById('lastScoreValue').textContent = `${acertos}/${total} (+${pts} pts)`;
+        document.getElementById('lastScore').classList.remove('hidden-screen');
+        document.getElementById('userPointsDisplay').textContent = `Pontos: ${totalPoints}`;
+        
+        if(!document.getElementById('ranking').classList.contains('hidden-screen')) renderRanking();
+      } else {
+        if(confirm('Deseja fazer login para salvar sua pontuação e aparecer no ranking?')) location.hash = '#login';
+      }
+    });
+
+    const gabaritosMaterias = {
+      portugues: { p1: 'C', p2: 'B', p3: 'A', p4: 'A' },
+      matematica: { m1: 'B', m2: 'C', m3: 'B', m4: 'C' },
+      historia: { h1: 'B', h2: 'B', h3: 'B', h4: 'C' },
+      geografia: { g1: 'C', g2: 'C', g3: 'C', g4: 'C' },
+      ciencias: { c1: 'B', c2: 'B', c3: 'B', c4: 'C' }
+    };
+
+    function gradeForm(formId, gabarito, resultElId, scoreKeyPrefix){
+      const form = document.getElementById(formId);
+      if(!form) return;
+      let acertos = 0;
+      let total = 0;
+      for(const q in gabarito){
+        total++;
+        const sel = form.querySelector(`input[name="${q}"]:checked`);
+        if(sel && sel.value === gabarito[q]) acertos++;
+      }
+      const resEl = document.getElementById(resultElId);
+      resEl.textContent = `Você acertou ${acertos} de ${total} questões.`;
+      resEl.classList.remove('hidden-screen');
+      
+      const email = getLoggedUserEmail();
+      
+      const pts = acertos * 8;
+      if(email){
+        localStorage.setItem(`${scoreKeyPrefix}_${email}`, `${acertos}/${total}`);
+     
+        localStorage.setItem(`score_${email}`, `${acertos}/${total}`);
+        const totalPoints = addPointsToUser(email, pts);
+        document.getElementById('lastScoreValue').textContent = `${acertos}/${total} (+${pts} pts)`;
+        document.getElementById('lastScore').classList.remove('hidden-screen');
+        document.getElementById('userPointsDisplay').textContent = `Pontos: ${totalPoints}`;
+        if(!document.getElementById('ranking').classList.contains('hidden-screen')) renderRanking();
+      } else {
+        if(confirm('Faça login para salvar sua pontuação e aparecer no ranking. Deseja entrar agora?')) location.hash = '#login';
+      }
+    }
+
+    document.getElementById('btnCheck_portugues')?.addEventListener('click', ()=>{
+      gradeForm('quiz_portugues', gabaritosMaterias.portugues, 'result_portugues', 'score_portugues');
+    });
+    document.getElementById('btnCheck_matematica')?.addEventListener('click', ()=>{
+      gradeForm('quiz_matematica', gabaritosMaterias.matematica, 'result_matematica', 'score_matematica');
+    });
+    document.getElementById('btnCheck_historia')?.addEventListener('click', ()=>{
+      gradeForm('quiz_historia', gabaritosMaterias.historia, 'result_historia', 'score_historia');
+    });
+    document.getElementById('btnCheck_geografia')?.addEventListener('click', ()=>{
+      gradeForm('quiz_geografia', gabaritosMaterias.geografia, 'result_geografia', 'score_geografia');
+    });
+    document.getElementById('btnCheck_ciencias')?.addEventListener('click', ()=>{
+      gradeForm('quiz_ciencias', gabaritosMaterias.ciencias, 'result_ciencias', 'score_ciencias');
+    });
+
+    function loadLoggedUserToUI(){
+      const email = getLoggedUserEmail();
+      if(!email) return;
+      const raw = localStorage.getItem(getUserKey(email));
+      if(!raw) return;
+      const user = JSON.parse(raw);
+      document.getElementById('userNameDisplay').textContent = user.name;
+      document.getElementById('userEmailDisplay').textContent = user.email;
+      if(user.avatar){
+        document.getElementById('profileAvatar').src = user.avatar;
+        document.getElementById('navAvatar').src = user.avatar;
+        document.getElementById('homeAvatar').src = user.avatar;
+      }
+      document.getElementById('greetName').textContent = user.name;
+      document.getElementById('greet').classList.remove('hidden');
+      const score = localStorage.getItem(`score_${email}`);
+      if(score){ document.getElementById('lastScoreValue').textContent = score; document.getElementById('lastScore').classList.remove('hidden-screen'); }
+      const pts = Number(localStorage.getItem(`points_${email}`) || 0);
+      document.getElementById('userPointsDisplay').textContent = `Pontos: ${pts}`;
+    }
+
+    function updateNavUser(){
+      const email = getLoggedUserEmail();
+      if(!email){
+        document.getElementById('greet').classList.add('hidden');
+        return;
+      }
+      const raw = localStorage.getItem(getUserKey(email));
+      if(!raw) return;
+      const user = JSON.parse(raw);
+      document.getElementById('greetName').textContent = user.name;
+      document.getElementById('greet').classList.remove('hidden');
+      if(user.avatar){
+        document.getElementById('navAvatar').src = user.avatar;
+      }
+    }
+
+    -
+    (function init(){
+      
+      const defaultAvatar = 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=400&auto=format&fit=crop&s=2f7b4ad3b6f9c4a2f6c5c8f6a6d3a1dd';
+      document.getElementById('navAvatar').src = defaultAvatar;
+      document.getElementById('profileAvatar').src = defaultAvatar;
+      document.getElementById('homeAvatar').src = defaultAvatar;
+
+      const hash = location.hash.replace('#','');
+      if(hash && SCREENS.includes(hash)) {
+        
+        routeToHash();
+      } else {
+        const logged = getLoggedUserEmail();
+        if(logged){
+          loadLoggedUserToUI();
+          location.hash = '#home';
+        } else {
+          location.hash = '#login';
+        }
+      }
+     
+      routeToHash();
+    })();
+  
+    window._renderRanking = renderRanking;
+
+  </script>
+</body>
+</html>
